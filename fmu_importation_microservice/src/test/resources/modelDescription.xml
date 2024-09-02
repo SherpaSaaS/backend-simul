@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fmiModelDescription
+  fmiVersion="2.0"
+  modelName="try1"
+  guid="{fcc30679-5920-6414-b10c-701dc631afcc}"
+  description=""
+  generationTool="Simulink (R2021a)"
+  version="1.1"
+  variableNamingConvention="structured"
+  generationDateAndTime="2024-01-31T15:53:43Z"
+  numberOfEventIndicators="0">
+
+<CoSimulation
+  modelIdentifier="try1"
+  canBeInstantiatedOnlyOncePerProcess="true"
+  canNotUseMemoryManagementFunctions="true">
+   <SourceFiles>
+      <File name ="try1.c"/>
+      <File name ="try1_data.c"/>
+      <File name ="try1_fmu.c"/>
+      <File name ="lccstub.c"/>
+   </SourceFiles>
+</CoSimulation>
+<DefaultExperiment startTime="0" stopTime="10" stepSize="0.1"/>
+<VendorAnnotations>
+  <Tool name="Simulink">
+    <Simulink>
+      <ImportCompatibility requireRelease="all" requireMATLABOnPath="no" />
+      <SimulinkModelInterface>
+        <Inport dataType="double" portNumber="1" portName="In1"/>
+        <Outport dataType="double" portNumber="1" portName="Out1"/>
+      </SimulinkModelInterface>
+    </Simulink>
+  </Tool>
+</VendorAnnotations>
+<ModelVariables>
+  <ScalarVariable name="In1" valueReference="0" description="In1" causality="input" variability="continuous" >
+    <Real start="0"  />
+  </ScalarVariable> <!-- index="1" -->
+  <ScalarVariable name="Out1" valueReference="1" description="Out1" causality="output" variability="continuous" initial="calculated">
+    <Real  />
+  </ScalarVariable> <!-- index="2" -->
+  <ScalarVariable name="time" valueReference="2" description="time" causality="independent" variability="continuous" >
+    <Real  />
+  </ScalarVariable> <!-- index="3" -->
+</ModelVariables>
+<ModelStructure>
+  <Outputs>
+    <Unknown index="2" />
+  </Outputs>
+  <InitialUnknowns>
+    <Unknown index="2" />
+  </InitialUnknowns>
+</ModelStructure>
+</fmiModelDescription>
+
