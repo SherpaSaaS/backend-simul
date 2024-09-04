@@ -7,21 +7,6 @@ on:
     branches: [ "master" ]
 
 jobs:
-  check-secrets:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Build with Maven
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOSTNAME }}
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        run: |
-          echo "Testing HOSTNAME: ${{ secrets.HOSTNAME }}"
-          echo "Testing USERNAME: ${{ secrets.USERNAME }}"
-          ls -al
-          sudo ls
   build:
 
     runs-on: ubuntu-latest
