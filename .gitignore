@@ -12,7 +12,7 @@ target/
  ### simulation_data_handler/src/main/resources/application.properties
  ### simulation_microservice/src/main/resources/application.properties
 
-
+**/application.properties
 
 
 ### IntelliJ IDEA ###
