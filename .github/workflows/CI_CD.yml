@@ -20,6 +20,8 @@ jobs:
         run: |
           echo "Testing HOSTNAME: ${{ secrets.HOSTNAME }}"
           echo "Testing USERNAME: ${{ secrets.USERNAME }}"
+          ls -al
+          sudo ls
   build:
 
     runs-on: ubuntu-latest
