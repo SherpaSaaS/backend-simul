@@ -15,6 +15,9 @@ target/
 **/application.properties
 
 
+*.env
+
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/workspace.xml
