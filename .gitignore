@@ -2,8 +2,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-### api-gateway/src/main/resources/application.properties
-### authentication_jwt_security_microservice/src/main/resources/application.properties
+#api-gateway/src/main/resources/application.properties
+## authentication_jwt_security_microservice/src/main/resources/application.properties
  ### discovery-server/src/main/resources/application.properties
  ### fmu_dictionary_microservice/src/main/resources/application.properties
  ### fmu_importation_microservice/src/main/resources/application.properties
@@ -11,6 +11,9 @@ target/
  ### scenario_verification_microservice/src/main/resources/application.properties
  ### simulation_data_handler/src/main/resources/application.properties
  ### simulation_microservice/src/main/resources/application.properties
+ **/src/main/resources/application.properties
+
+
 
 
 

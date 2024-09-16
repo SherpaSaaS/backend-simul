@@ -12,6 +12,7 @@
       <module>discovery-server</module>
       <module>authentication_jwt_security_microservice</module>
       <module>gestion_users</module>
+    <module>simulation_win_microservice</module>
 
   </modules>
   <parent>
