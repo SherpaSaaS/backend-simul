@@ -1,0 +1,56 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build with Maven
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOSTNAME }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        #key: ${{ secrets.SSH_KEY }}
+        #passphrase: ${{ secrets.PASSPHRASE }}
+        script: |
+          echo "Connecting to the serveer"
+          sudo ls
+          sudo su -
+          cd /opt/digitalTwins/dev/Backend
+          sudo ls
+          sudo git pull origin master
+          sudo mvn clean && sudo mvn package -DskipTests
+          cd ..
+          sudo docker-compose down
+          sh buildImages.sh
+   
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to server using SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          #key: ${{ secrets.SSH_KEY }}
+          #passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            echo "Connecting to the serveer"
+            sudo su -
+            cd /opt/digitalTwins/dev
+            sudo docker-compose up -d
+     
