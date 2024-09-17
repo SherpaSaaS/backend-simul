@@ -20,10 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,9 +37,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 @RestController
@@ -138,19 +141,41 @@ public class FmuCrudController {
     /*
       UPLOAD FMU TO a DIRECTORY AND EXTRACT IT
      */
+
+
     @PostMapping("/upload")
+
     public ResponseEntity<FmuUploadResponse> uploadFmu(@RequestParam("file") MultipartFile file) throws NotSupportedException {
+
         try {
 
             // UPLOAD FMU TO a DIRECTORY AND EXTRACT IT
             //TODO handle differant possible exception when uploading FMU!
             String targetFile=fmuUploadService.uploadFmu(file);
             System.out.println("targetFile "+targetFile);
-
             //TODO make FmuModelDescription returned From the upload Service as FMU object class
             String extractedFolder = propertiesAccessor.getExtractedFmusFolder() +
                     Objects.requireNonNull(file.getOriginalFilename()).replace(".fmu", "") +
                     File.separator;
+
+            File extractedDir = new File(extractedFolder);
+            AtomicInteger extensionWind = new AtomicInteger();
+            AtomicInteger extensionLinux = new AtomicInteger();
+            try (Stream<Path> paths = Files.walk(Paths.get(extractedFolder))) {
+                    paths.collect(Collectors.toList()).forEach(x-> {
+                   if (x.toString().endsWith(".dll"))
+                {
+                     extensionWind.set(1);
+
+                } else if (x.toString().endsWith(".so")) {
+                        extensionLinux.set(1);
+
+                   }
+               }   );
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
 
             FmuModelDescription description = FmuModelDescriptionReader.getModelDescriptionFromFmuDescriptionXmlFile(new File(extractedFolder + "modelDescription.xml"));
@@ -165,6 +190,8 @@ public class FmuCrudController {
                             .fmiVersion(description.getFmiVersion())
                             .inputVariableBlocs(null)
                             .modelImagePath(null)
+                            .extensionLinux(extensionLinux.toString())
+                            .extensionWind(extensionWind.toString())
                             .build();
                     Fmu finalFmu = fmuService.save(fmu);
                     List<Variable> variables = FmuHelper.getVariableList(description , finalFmu , variableService);
@@ -195,6 +222,16 @@ public class FmuCrudController {
             return new ResponseEntity<>(new FmuUploadResponse(null,null , null, null ,null, false , "failed to upload fmu") , HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(new FmuUploadResponse(null ,null , null, null , null , false , "failed to upload fmu") , HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public class ListFilesUsingStreams {
+        public static Set<String> listFilesUsingFilesList(String dir) throws IOException {
+            return Files.list(Paths.get(dir))
+                    .filter(file -> !Files.isDirectory(file))
+                    .map(Path::getFileName)
+                    .map(Path::toString)
+                    .collect(Collectors.toSet());
+        }
     }
 
     /*

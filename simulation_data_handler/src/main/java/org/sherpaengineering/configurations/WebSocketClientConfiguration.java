@@ -22,9 +22,19 @@ import java.util.List;
 @Configuration
 public class WebSocketClientConfiguration {
 
+    private final String platform = "windows";
+
     @Autowired
     public WebSocketClientConfiguration(WebSocketHandler webSocketHandler , DiscoveryClient client) {
-        List<ServiceInstance> siList = client.getInstances("simulation-ms");
+        List<ServiceInstance> siList;
+        if (platform=="windows")
+        {
+             siList = client.getInstances("simulation-win-ms");
+        }
+        else{
+            siList = client.getInstances("simulation-ms");
+        }
+       
         ServiceInstance si = siList.get(0);
 
         String webSocketUrl = si.getUri().toString().replace("http","ws") + "/simulation/websocket";

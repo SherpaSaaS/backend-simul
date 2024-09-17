@@ -17,6 +17,8 @@ import java.util.Map;
 public class FmuUploadResponse {
     private Integer fmuId;
     private FmuModelDescription modelDescription;
+    //private Integer ExtensionWind;
+   // private Integer ExtensionLinux;
     private List<BlocsControllersDto> blocsControllers;
     private List<FmuVariableDto> unlinkedVariables;
     private List<FmuVariableDto> outputVariables;

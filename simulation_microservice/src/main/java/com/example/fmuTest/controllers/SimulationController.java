@@ -108,6 +108,7 @@ public class SimulationController {
         try {
             //to call the variableController of the importation microService
             RestTemplate restTemplate = new RestTemplate();
+
             HttpHeaders header = new HttpHeaders();
             header.set(HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));
             header.setContentType(MediaType.APPLICATION_JSON);
