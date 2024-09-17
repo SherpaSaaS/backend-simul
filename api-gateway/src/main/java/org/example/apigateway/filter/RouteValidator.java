@@ -26,6 +26,7 @@ public class RouteValidator {
     public static final List<String> userApiEndpoints = List.of(
             "/api/fmu/getAll",
             "/api/simulation/**",
+            "/api/simulationWin/**",
             "/api/variable/getFmuVariables/**"
     );
 //Predicate named isSecured which is a functional interface used for testing conditions

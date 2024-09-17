@@ -49,6 +49,10 @@ public class Fmu {
 
     private String modelImagePath;
 
+    private String extensionWind;
+
+    private String extensionLinux;
+
     @OneToMany(mappedBy = "fmu",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -75,6 +79,8 @@ public class Fmu {
                 ", author='" + author + '\'' +
                 ", version='" + version + '\'' +
                 ",modelImagePath= "+modelImagePath+ '\'' +
+                ",extensionLinux= "+extensionLinux+ '\'' +
+                ",extensionWind= "+extensionWind+ '\'' +
                 '}';
     }
 }
