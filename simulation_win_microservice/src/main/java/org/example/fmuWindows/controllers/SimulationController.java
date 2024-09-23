@@ -127,6 +127,7 @@ public class SimulationController {
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList());
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
+            System.out.println("ddddaaaaaaaaatttttttttttttaaaaaaaaaaaa : "+responseEntity.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }
