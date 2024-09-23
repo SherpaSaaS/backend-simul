@@ -103,7 +103,8 @@ public class SimulationController {
 
 
     @PostMapping("/default/{id}")
-    public ResponseEntity<Boolean> testSimulation(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+    public ResponseEntity<GetFmuSimulationInfoResponse> testSimulation(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+        ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
         try {
             //to call the variableController of the importation microService
             RestTemplate restTemplate = new RestTemplate();
@@ -120,16 +121,16 @@ public class SimulationController {
             ServiceInstance si = siList.get(0);
 
             // read URI and Add path that returns url
-            String url = si.getUri()+"/api/variable/getVariable/" + fmuId;
+            String url = si.getUri() + "/api/variable/getVariable/" + fmuId;
 
-            ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList());
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+        return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
     }
 
     @PostMapping("/changeVariableValue")
