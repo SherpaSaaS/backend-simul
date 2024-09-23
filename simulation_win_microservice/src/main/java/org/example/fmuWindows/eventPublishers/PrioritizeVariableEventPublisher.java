@@ -1,7 +1,8 @@
 package org.example.fmuWindows.eventPublishers;
 
-import com.example.fmuTest.dtos.PrioritizeVariableEventDto;
-import com.example.fmuTest.events.PriortizeVariableEvent;
+
+import org.example.fmuWindows.dtos.PrioritizeVariableEventDto;
+import org.example.fmuWindows.events.PriortizeVariableEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

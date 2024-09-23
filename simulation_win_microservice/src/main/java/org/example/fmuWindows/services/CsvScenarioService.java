@@ -1,13 +1,14 @@
 package org.example.fmuWindows.services;
 
 
-import com.example.fmuTest.dtos.FmuSimulationVariableDto;
-import com.example.fmuTest.dtos.GetFmuSimulationInfoResponse;
-import com.example.fmuTest.models.FileValidationResult;
-import com.example.fmuTest.models.VariablesValues;
+
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
+import org.example.fmuWindows.dtos.FmuSimulationVariableDto;
+import org.example.fmuWindows.dtos.GetFmuSimulationInfoResponse;
+import org.example.fmuWindows.models.FileValidationResult;
+import org.example.fmuWindows.models.VariablesValues;
 import org.javafmi.wrapper.v1.Access;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

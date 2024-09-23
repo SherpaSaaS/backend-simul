@@ -1,16 +1,16 @@
 package org.example.fmuWindows.controllers;
 
-import com.example.fmuTest.dtos.GetFmuSimulationInfoResponse;
-import com.example.fmuTest.dtos.PrioritizeSimulationVariableInputEventDto;
-import com.example.fmuTest.dtos.PrioritizeVariableEventDto;
-import com.example.fmuTest.eventPublishers.PrioritizeVariableEventPublisher;
-import com.example.fmuTest.models.FileValidationResult;
-import com.example.fmuTest.models.VariablePrioritizerMap;
-import com.example.fmuTest.models.VariablesValues;
-import com.example.fmuTest.services.CsvScenarioService;
-import com.example.fmuTest.services.DataToCSVService;
-import com.example.fmuTest.services.FmuService;
+import org.example.fmuWindows.models.FileValidationResult;
 import jakarta.servlet.http.HttpServletRequest;
+import org.example.fmuWindows.dtos.GetFmuSimulationInfoResponse;
+import org.example.fmuWindows.dtos.PrioritizeSimulationVariableInputEventDto;
+import org.example.fmuWindows.dtos.PrioritizeVariableEventDto;
+import org.example.fmuWindows.eventPublishers.PrioritizeVariableEventPublisher;
+import org.example.fmuWindows.models.VariablePrioritizerMap;
+import org.example.fmuWindows.models.VariablesValues;
+import org.example.fmuWindows.services.CsvScenarioService;
+import org.example.fmuWindows.services.DataToCSVService;
+import org.example.fmuWindows.services.FmuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
