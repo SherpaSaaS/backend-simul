@@ -113,6 +113,8 @@ public class SimulationController {
             header.set(HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));
             header.setContentType(MediaType.APPLICATION_JSON);
             header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+            header.set("Platform","linux");
+
             HttpEntity requestToSend = new HttpEntity(header);
 
             // get ServiceInstance list using serviceId
@@ -120,11 +122,14 @@ public class SimulationController {
 
             // read manually one instance from index#0
             ServiceInstance si = siList.get(0);
+            System.out.println("------------------instance    --------------------"+si.getUri());
 
             // read URI and Add path that returns url
             String url = si.getUri()+"/api/variable/getVariable/" + fmuId;
 
             ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
+            System.out.println("-----------dataaa ---------------- : "+responseEntity.getBody());
+
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList());
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);

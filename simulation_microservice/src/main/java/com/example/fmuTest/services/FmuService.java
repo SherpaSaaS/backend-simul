@@ -190,6 +190,8 @@ public class FmuService {
             messagingTemplate.convertAndSend("/topic/greetings", valuesDto);
 
         }
+        System.out.println("--------------valuesDto ------------"+valuesDto);
+
         csvWriter.close();
         simulation.terminate();
 

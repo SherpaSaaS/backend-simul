@@ -1,6 +1,5 @@
 package org.example.fmuWindows.controllers;
 
-import com.sun.jna.Platform;
 import org.example.fmuWindows.models.FileValidationResult;
 import jakarta.servlet.http.HttpServletRequest;
 import org.example.fmuWindows.dtos.GetFmuSimulationInfoResponse;
@@ -28,7 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/simulationWin")
-public class SimulationController {
+public class SimulationWinController {
     @Autowired
     FmuService fmu;
 
@@ -104,7 +103,7 @@ public class SimulationController {
 
 
     @PostMapping("/default/{id}")
-    public ResponseEntity<GetFmuSimulationInfoResponse> testSimulation(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+    public ResponseEntity<GetFmuSimulationInfoResponse> simulationWithDefault(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
         ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
         try {
             //to call the variableController of the importation microService
@@ -124,6 +123,7 @@ public class SimulationController {
 
             // read manually one instance from index#0
             ServiceInstance si = siList.get(0);
+            System.out.println("------------------instance    --------------------"+si.getUri());
 
             // read URI and Add path that returns url
             String url = si.getUri() + "/api/variable/getVariable/" + fmuId;

@@ -147,7 +147,7 @@ public class FmuService {
         //object to be published in the topic
         SimulationValuesDto valuesDto = new SimulationValuesDto();
 
-        System.out.println("--------------valuesDto ------------"+valuesDto);
+        System.out.println("--------------valuesDto first------------"+valuesDto);
 
         //map through list of variables to insert variablenames
         String[] variableNamesArray = fmuVariableList.stream()
@@ -165,6 +165,7 @@ public class FmuService {
                     //System.out.println(variable.getName());
                     return variable.getName().toString();
                 }).toList().toArray(new String[0]);
+        System.out.println("--------------variableNamesToSend ------------"+variableNamesToSend);
 
         /*
         Simulation
@@ -190,6 +191,8 @@ public class FmuService {
             messagingTemplate.convertAndSend("/topic/greetings", valuesDto);
 
         }
+        System.out.println("--------------valuesDto ------------"+valuesDto);
+
         csvWriter.close();
         simulation.terminate();
 
