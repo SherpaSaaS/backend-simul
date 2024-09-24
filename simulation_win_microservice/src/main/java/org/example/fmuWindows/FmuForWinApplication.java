@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class FmuTestApplication {
+public class FmuForWinApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FmuTestApplication.class, args);
+		SpringApplication.run(FmuForWinApplication.class, args);
 	}
 
 }

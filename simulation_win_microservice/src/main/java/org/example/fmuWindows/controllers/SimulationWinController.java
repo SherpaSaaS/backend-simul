@@ -117,6 +117,10 @@ public class SimulationWinController {
 
             HttpEntity requestToSend = new HttpEntity(header);
             System.out.println("------------------header   --------------------"+header);
+            System.out.println("----------------------request get path info-------------- "+request.getPathInfo());
+
+            System.out.println("----------------------request get context  path -------------- "+request.getContextPath());
+
 
             // get ServiceInstance list using serviceId
             List<ServiceInstance> siList = client.getInstances("fmu-importation-ms");
