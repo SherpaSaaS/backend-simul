@@ -1,5 +1,6 @@
 package org.example.fmuWindows.controllers;
 
+import com.sun.jna.Platform;
 import org.example.fmuWindows.models.FileValidationResult;
 import jakarta.servlet.http.HttpServletRequest;
 import org.example.fmuWindows.dtos.GetFmuSimulationInfoResponse;
@@ -112,7 +113,11 @@ public class SimulationController {
             header.set(HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));
             header.setContentType(MediaType.APPLICATION_JSON);
             header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+            header.set("Platform","windows");
+
             HttpEntity requestToSend = new HttpEntity(header);
+            System.out.println("------------------header   --------------------"+header);
 
             // get ServiceInstance list using serviceId
             List<ServiceInstance> siList = client.getInstances("fmu-importation-ms");
@@ -125,9 +130,13 @@ public class SimulationController {
 
             responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
+            System.out.println("------------------befooooooore  --------------------");
+
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList());
+            System.out.println("------------------between  --------------------");
+
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
-            System.out.println("ddddaaaaaaaaatttttttttttttaaaaaaaaaaaa : "+responseEntity.getBody());
+            System.out.println("-----------dataaa ---------------- : "+responseEntity.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }
