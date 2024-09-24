@@ -113,14 +113,17 @@ public class FmuService {
     public void runDefaultSimulation(Integer fmuId, List<FmuSimulationVariableDto> fmuVariableList) throws IOException {
         //create a hashmap with variablenames and their data to easily access data log(1) complexicity
         HashMap<String, FmuSimulationVariableDto> variableDataMap = new HashMap<>();
+        System.out.println("--------------map decleration ------------");
         fmuVariableList.stream()
                 .filter(var -> var.isTunnable() ||var.isHasConfiguration())
                 .forEach(variable -> variableDataMap.put(variable.getName(), variable));
 
+        System.out.println("-------------- fmuVariableList ------------"+fmuVariableList);
 
         List<String> variableNames = fmuVariableList.stream()
                 .map(variable -> variable.getName().toString())
                 .collect(Collectors.toList());
+        System.out.println("-------------- variableNames ------------"+variableNames);
 
         ICSVWriter csvWriter = exportToCsv(variableNames);
         //double result = 0;
@@ -134,6 +137,7 @@ public class FmuService {
         int nbSteps = (int) Math.round(stopTime / stepSize);
         Simulation simulation = new Simulation(fmusFolder + "ControlledTemperature.fmu");
 
+        System.out.println("--------------simulation  path ------------"+fmusFolder+"----------fmu id --------"+fmuId);
 
         simulation.init(startTime, stopTime);
         // Convert List<String> to String[]
@@ -143,12 +147,15 @@ public class FmuService {
         //object to be published in the topic
         SimulationValuesDto valuesDto = new SimulationValuesDto();
 
+        System.out.println("--------------valuesDto ------------"+valuesDto);
 
         //map through list of variables to insert variablenames
         String[] variableNamesArray = fmuVariableList.stream()
                 .map(variable -> variable.getName().toString())
                 .toList()
                 .toArray(new String[0]);
+
+        System.out.println("--------------variableNamesArray ------------"+variableNamesArray);
 
         String[] variableNamesToSend = fmuVariableList.stream()
                 .filter(variable -> variable.isTunnable() || variable.isHasConfiguration())
