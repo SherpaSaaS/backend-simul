@@ -120,6 +120,7 @@ public class SimulationWinController {
             System.out.println("----------------------request get path info-------------- "+request.getPathInfo());
 
             System.out.println("----------------------request get context  path -------------- "+request.getContextPath());
+            System.out.println("---------------------- fmu id  -------------- "+fmuId.getClass().getName());
 
 
             // get ServiceInstance list using serviceId
