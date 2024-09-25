@@ -138,7 +138,7 @@ public class SimulationWinController {
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             System.out.println("------------------befooooooore  --------------------");
 
-            fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList());
+            fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
             System.out.println("------------------between  --------------------");
 
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
