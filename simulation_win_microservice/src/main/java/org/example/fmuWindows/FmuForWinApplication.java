@@ -13,6 +13,7 @@ public class FmuForWinApplication {
 	public static void main(String[] args) {
 		System.setProperty("os.name", "win");
 		SpringApplication.run(FmuForWinApplication.class, args);
+		System.out.println("=========================="+System.getProperty("os.name"));
 
 	}
 }
