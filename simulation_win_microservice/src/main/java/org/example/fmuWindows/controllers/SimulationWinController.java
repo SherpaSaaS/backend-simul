@@ -104,7 +104,8 @@ public class SimulationWinController {
 
     @PostMapping("/default/{id}")
     public ResponseEntity<Integer> simulationWithDefault(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
-     //   ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
+        //   ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
+        ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
         try {
             //to call the variableController of the importation microService
             RestTemplate restTemplate = new RestTemplate();
@@ -113,14 +114,14 @@ public class SimulationWinController {
             header.setContentType(MediaType.APPLICATION_JSON);
             header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
-            header.set("Platform","windows");
+            header.set("Platform", "windows");
 
             HttpEntity requestToSend = new HttpEntity(header);
-            System.out.println("------------------header   --------------------"+header);
-            System.out.println("----------------------request get path info-------------- "+request.getPathInfo());
+            System.out.println("------------------header   --------------------" + header);
+            System.out.println("----------------------request get local name -------------- " + request.getLocalName());
 
-            System.out.println("----------------------request get context  path -------------- "+request.getContextPath());
-            System.out.println("---------------------- fmu id  -------------- "+fmuId.getClass().getName());
+            //System.out.println("----------------------request get context  path -------------- "+request.);
+            System.out.println("---------------------- fmu id  -------------- " + fmuId.getClass().getName().toString());
 
 
             // get ServiceInstance list using serviceId
@@ -128,12 +129,12 @@ public class SimulationWinController {
 
             // read manually one instance from index#0
             ServiceInstance si = siList.get(0);
-            System.out.println("------------------instance    --------------------"+si.getUri());
+            System.out.println("---------------------------instance host     --------------------" + si.getHost());
 
             // read URI and Add path that returns url
             String url = si.getUri() + "/api/variable/getVariable/" + fmuId;
 
-            ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             System.out.println("------------------befooooooore  --------------------");
 
@@ -141,11 +142,11 @@ public class SimulationWinController {
             System.out.println("------------------between  --------------------");
 
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
-            System.out.println("-----------dataaa ---------------- : "+responseEntity.getBody());
+            System.out.println("-----------dataaa ---------------- : " + responseEntity.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(fmuId, HttpStatus.OK);
+        return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
     }
 
     @PostMapping("/changeVariableValue")

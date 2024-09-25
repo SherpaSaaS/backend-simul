@@ -135,7 +135,7 @@ public class FmuService {
         double stopTime = 50000;
         double stepSize = 1;
         int nbSteps = (int) Math.round(stopTime / stepSize);
-        Simulation simulation = new Simulation(fmusFolder + "ControlledTemperature.fmu");
+        Simulation simulation = new Simulation(fmusFolder + "FC.fmu");
 
         System.out.println("--------------simulation  path ------------"+fmusFolder+"----------fmu id --------"+fmuId);
 
