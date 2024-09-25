@@ -103,7 +103,7 @@ public class SimulationWinController {
 
 
     @PostMapping("/default/{id}")
-    public ResponseEntity<Integer> simulationWithDefault(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+    public ResponseEntity<GetFmuSimulationInfoResponse> simulationWithDefault(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
         //   ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
         ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
         try {
