@@ -117,6 +117,7 @@ public class SimulationWinController {
             header.set("Platform", "windows");
 
             HttpEntity requestToSend = new HttpEntity(header);
+
             System.out.println("------------------header   --------------------" + header);
             System.out.println("----------------------request get local name -------------- " + request.getLocalName());
 
@@ -137,6 +138,8 @@ public class SimulationWinController {
             responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             System.out.println("------------------befooooooore  --------------------");
+            System.setProperty("os.name","win");
+            System.out.println("=============os name============="+System.getProperty("os.name"));
 
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
             System.out.println("------------------between  --------------------");
