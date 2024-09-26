@@ -18,7 +18,7 @@ public class FmuForWinApplication {
 		System.out.println("============path=============="+System.getProperty("java.library.path"));
 
 
-		System.loadLibrary("libraryFile");
+
 
 
 	}
