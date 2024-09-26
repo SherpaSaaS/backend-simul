@@ -19,7 +19,7 @@ public class FmuForWinApplication {
 
 
 		System.loadLibrary("libraryFile");
-		System.loadLibrary("libraryFile");
+
 
 	}
 }
