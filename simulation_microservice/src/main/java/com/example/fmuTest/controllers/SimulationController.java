@@ -131,7 +131,7 @@ public class SimulationController {
             String url = si.getUri()+"/api/variable/getVariable/" + fmuId;
 
           responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
-            System.out.println("-----------dataaa ---------------- : "+responseEntity.getBody());
+           // System.out.println("-----------dataaa ---------------- : "+responseEntity.getBody());
 
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
