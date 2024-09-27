@@ -146,11 +146,9 @@ public class FmuCrudController {
 
     @PostMapping("/upload")
 
-<<<<<<< HEAD
-    public ResponseEntity<FmuUploadResponse> uploadFmu(@RequestParam("file") MultipartFile file) throws NotSupportedException {
-=======
+
     public ResponseEntity<FmuUploadResponse> uploadFmu(@RequestParam(name="file",required = false)  @Valid final MultipartFile file) throws NotSupportedException {
->>>>>>> master
+
 
         try {
 
