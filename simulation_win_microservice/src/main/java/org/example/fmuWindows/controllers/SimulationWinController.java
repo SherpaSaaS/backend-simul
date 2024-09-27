@@ -141,6 +141,8 @@ public class SimulationWinController {
             System.setProperty("os.name","win");
             System.out.println("=============os name============="+System.getProperty("os.name"));
             System.out.println("=============env ============="+System.getenv());
+
+            System.out.println("=============java tmp dir  ============="+System.getProperty("java.io.tmpdir"));
             System.out.println("=============path  ============="+responseEntity.getBody().getFmuPath());
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
             System.out.println("------------------between  --------------------");
