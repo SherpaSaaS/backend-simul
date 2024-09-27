@@ -16,6 +16,7 @@ import com.example.fmu.fmuImportationMicroservice.utils.FmuModelDescriptionReade
 import com.example.fmu.fmuImportationMicroservice.utils.PropertiesAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.NotSupportedException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -145,7 +146,11 @@ public class FmuCrudController {
 
     @PostMapping("/upload")
 
+<<<<<<< HEAD
     public ResponseEntity<FmuUploadResponse> uploadFmu(@RequestParam("file") MultipartFile file) throws NotSupportedException {
+=======
+    public ResponseEntity<FmuUploadResponse> uploadFmu(@RequestParam(name="file",required = false)  @Valid final MultipartFile file) throws NotSupportedException {
+>>>>>>> master
 
         try {
 

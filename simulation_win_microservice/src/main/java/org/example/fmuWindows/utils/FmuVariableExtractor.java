@@ -1,6 +1,6 @@
 package org.example.fmuWindows.utils;
 
-import com.example.fmuTest.models.Variable;
+import org.example.fmuWindows.models.Variable;
 import org.javafmi.modeldescription.ScalarVariable;
 import org.javafmi.wrapper.Simulation;
 

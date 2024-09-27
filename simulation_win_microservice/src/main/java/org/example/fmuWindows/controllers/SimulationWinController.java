@@ -1,16 +1,16 @@
 package org.example.fmuWindows.controllers;
 
-import com.example.fmuTest.dtos.GetFmuSimulationInfoResponse;
-import com.example.fmuTest.dtos.PrioritizeSimulationVariableInputEventDto;
-import com.example.fmuTest.dtos.PrioritizeVariableEventDto;
-import com.example.fmuTest.eventPublishers.PrioritizeVariableEventPublisher;
-import com.example.fmuTest.models.FileValidationResult;
-import com.example.fmuTest.models.VariablePrioritizerMap;
-import com.example.fmuTest.models.VariablesValues;
-import com.example.fmuTest.services.CsvScenarioService;
-import com.example.fmuTest.services.DataToCSVService;
-import com.example.fmuTest.services.FmuService;
+import org.example.fmuWindows.models.FileValidationResult;
 import jakarta.servlet.http.HttpServletRequest;
+import org.example.fmuWindows.dtos.GetFmuSimulationInfoResponse;
+import org.example.fmuWindows.dtos.PrioritizeSimulationVariableInputEventDto;
+import org.example.fmuWindows.dtos.PrioritizeVariableEventDto;
+import org.example.fmuWindows.eventPublishers.PrioritizeVariableEventPublisher;
+import org.example.fmuWindows.models.VariablePrioritizerMap;
+import org.example.fmuWindows.models.VariablesValues;
+import org.example.fmuWindows.services.CsvScenarioService;
+import org.example.fmuWindows.services.DataToCSVService;
+import org.example.fmuWindows.services.FmuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -27,7 +27,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/simulationWin")
-public class SimulationController {
+public class SimulationWinController {
     @Autowired
     FmuService fmu;
 
@@ -103,7 +103,9 @@ public class SimulationController {
 
 
     @PostMapping("/default/{id}")
-    public ResponseEntity<Boolean> testSimulation(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+    public ResponseEntity<GetFmuSimulationInfoResponse> simulationWithDefault(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+        //   ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
+        ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
         try {
             //to call the variableController of the importation microService
             RestTemplate restTemplate = new RestTemplate();
@@ -111,25 +113,44 @@ public class SimulationController {
             header.set(HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));
             header.setContentType(MediaType.APPLICATION_JSON);
             header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+
+            header.set("Platform", "windows");
+
             HttpEntity requestToSend = new HttpEntity(header);
+
+            System.out.println("------------------header   --------------------" + header);
+            System.out.println("----------------------request get local name -------------- " + request.getLocalName());
+
+            //System.out.println("----------------------request get context  path -------------- "+request.);
+         //   System.out.println("---------------------- fmu id  -------------- " + fmuId.getClass().getName().toString());
+
 
             // get ServiceInstance list using serviceId
             List<ServiceInstance> siList = client.getInstances("fmu-importation-ms");
 
             // read manually one instance from index#0
             ServiceInstance si = siList.get(0);
+          //  System.out.println("---------------------------instance host     --------------------" + si.getHost());
 
             // read URI and Add path that returns url
-            String url = si.getUri()+"/api/variable/getVariable/" + fmuId;
+            String url = si.getUri() + "/api/variable/getVariable/" + fmuId;
 
-            ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
-            fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList());
+            System.out.println("------------------befooooooore  --------------------");
+            System.setProperty("os.name","win");
+            System.out.println("=============os name============="+System.getProperty("os.name"));
+            System.out.println("=============env ============="+System.getenv());
+            System.out.println("=============path  ============="+responseEntity.getBody().getFmuPath());
+            fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
+            System.out.println("------------------between  --------------------");
+
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
+            System.out.println("-----------dataaa ---------------- : " + responseEntity.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+        return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
     }
 
     @PostMapping("/changeVariableValue")

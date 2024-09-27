@@ -1,19 +1,25 @@
 package org.example.fmuWindows.services;
 
-import com.example.fmuTest.dtos.FmuSimulationVariableDto;
-import com.example.fmuTest.dtos.SimulationValuesDto;
-import com.example.fmuTest.eventListeners.PrioritizeVariableEventListner;
-import com.example.fmuTest.models.VariablePrioritizerMap;
-import com.example.fmuTest.utils.DoubleComparator;
+
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
+import org.example.fmuWindows.dtos.FmuSimulationVariableDto;
+import org.example.fmuWindows.dtos.SimulationValuesDto;
+import org.example.fmuWindows.eventListeners.PrioritizeVariableEventListner;
+import org.example.fmuWindows.models.VariablePrioritizerMap;
+import org.example.fmuWindows.utils.DoubleComparator;
+import org.javafmi.proxy.FmiProxy;
+import org.javafmi.proxy.FmuFile;
+import org.javafmi.proxy.ProxyFactory;
+import org.javafmi.proxy.v2.FmuProxy;
 import org.javafmi.wrapper.Simulation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
@@ -109,17 +115,20 @@ public class FmuService {
 
 
 
-    public void runDefaultSimulation(Integer fmuId, List<FmuSimulationVariableDto> fmuVariableList) throws IOException {
+    public void runDefaultSimulation(Integer fmuId, List<FmuSimulationVariableDto> fmuVariableList,  String fmuPath) throws IOException {
         //create a hashmap with variablenames and their data to easily access data log(1) complexicity
         HashMap<String, FmuSimulationVariableDto> variableDataMap = new HashMap<>();
+       // System.out.println("--------------map decleration ------------");
         fmuVariableList.stream()
                 .filter(var -> var.isTunnable() ||var.isHasConfiguration())
                 .forEach(variable -> variableDataMap.put(variable.getName(), variable));
 
+        //System.out.println("-------------- fmuVariableList ------------"+fmuVariableList);
 
         List<String> variableNames = fmuVariableList.stream()
                 .map(variable -> variable.getName().toString())
                 .collect(Collectors.toList());
+      //  System.out.println("-------------- variableNames ------------"+variableNames);
 
         ICSVWriter csvWriter = exportToCsv(variableNames);
         //double result = 0;
@@ -131,8 +140,16 @@ public class FmuService {
         double stopTime = 50000;
         double stepSize = 1;
         int nbSteps = (int) Math.round(stopTime / stepSize);
-        Simulation simulation = new Simulation(fmusFolder + "ControlledTemperature.fmu");
+        System.out.println("************************************fmu path  *************"+fmuPath);
 
+        FmuFile fmuFile=new FmuFile(fmuPath);
+        System.out.println("************************************fmu get libreary path *************"+new File(fmuFile.getLibraryPath()));
+
+
+
+        Simulation simulation = new Simulation(fmuPath);
+
+        System.out.println("--------------simulation  path ------------"+fmusFolder+"----------fmu id --------"+fmuId);
 
         simulation.init(startTime, stopTime);
         // Convert List<String> to String[]
@@ -142,12 +159,15 @@ public class FmuService {
         //object to be published in the topic
         SimulationValuesDto valuesDto = new SimulationValuesDto();
 
+        System.out.println("--------------valuesDto first------------"+valuesDto);
 
         //map through list of variables to insert variablenames
         String[] variableNamesArray = fmuVariableList.stream()
                 .map(variable -> variable.getName().toString())
                 .toList()
                 .toArray(new String[0]);
+
+        System.out.println("--------------variableNamesArray ------------"+variableNamesArray);
 
         String[] variableNamesToSend = fmuVariableList.stream()
                 .filter(variable -> variable.isTunnable() || variable.isHasConfiguration())
@@ -157,6 +177,7 @@ public class FmuService {
                     //System.out.println(variable.getName());
                     return variable.getName().toString();
                 }).toList().toArray(new String[0]);
+        System.out.println("--------------variableNamesToSend ------------"+variableNamesToSend);
 
         /*
         Simulation
@@ -182,6 +203,8 @@ public class FmuService {
             messagingTemplate.convertAndSend("/topic/greetings", valuesDto);
 
         }
+        System.out.println("--------------valuesDto ------------"+valuesDto);
+
         csvWriter.close();
         simulation.terminate();
 

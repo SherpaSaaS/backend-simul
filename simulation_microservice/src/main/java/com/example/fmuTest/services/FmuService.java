@@ -13,6 +13,7 @@ import com.example.fmuTest.utils.VariableAccessor;
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
+import org.javafmi.proxy.FmuFile;
 import org.javafmi.wrapper.Simulation;
 
 import org.javafmi.wrapper.v2.Access;
@@ -22,6 +23,7 @@ import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
@@ -117,7 +119,7 @@ public class FmuService {
 
 
 
-    public void runDefaultSimulation(Integer fmuId, List<FmuSimulationVariableDto> fmuVariableList) throws IOException {
+    public void runDefaultSimulation(Integer fmuId, List<FmuSimulationVariableDto> fmuVariableList,String fmuPath) throws IOException {
         //create a hashmap with variablenames and their data to easily access data log(1) complexicity
         HashMap<String, FmuSimulationVariableDto> variableDataMap = new HashMap<>();
         fmuVariableList.stream()
@@ -139,7 +141,13 @@ public class FmuService {
         double stopTime = 50000;
         double stepSize = 1;
         int nbSteps = (int) Math.round(stopTime / stepSize);
-        Simulation simulation = new Simulation(fmusFolder + "ControlledTemperature.fmu");
+
+        FmuFile fmuFile=new FmuFile(fmuPath);
+        System.out.println("************************************fmu get libreary path *************"+new File(fmuFile.getLibraryPath()));
+        System.out.println("************************************fmu folder *************"+fmusFolder);
+
+
+        Simulation simulation = new Simulation(fmuPath);
 
 
         simulation.init(startTime, stopTime);
@@ -190,6 +198,10 @@ public class FmuService {
             messagingTemplate.convertAndSend("/topic/greetings", valuesDto);
 
         }
+        System.out.println("--------------valuesDto ------------"+valuesDto);
+        System.out.println("************************************fmu get libreary path *************"+new File(fmuFile.getLibraryPath()));
+        System.out.println("************************************fmu folder *************"+fmusFolder);
+
         csvWriter.close();
         simulation.terminate();
 

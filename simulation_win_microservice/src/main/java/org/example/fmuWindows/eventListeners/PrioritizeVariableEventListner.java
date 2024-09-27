@@ -1,6 +1,6 @@
 package org.example.fmuWindows.eventListeners;
 
-import com.example.fmuTest.events.PriortizeVariableEvent;
+import org.example.fmuWindows.events.PriortizeVariableEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
