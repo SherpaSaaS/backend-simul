@@ -138,7 +138,7 @@ public class SimulationWinController {
             responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
             System.out.println("------------------befooooooore  --------------------");
-            System.setProperty("os.name","win");
+            //System.setProperty("os.name","win");
             System.out.println("=============os name============="+System.getProperty("os.name"));
             System.out.println("=============env ============="+System.getenv());
 
