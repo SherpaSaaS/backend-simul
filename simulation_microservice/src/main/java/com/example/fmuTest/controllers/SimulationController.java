@@ -12,6 +12,7 @@ import com.example.fmuTest.models.VariablePrioritizerMap;
 import com.example.fmuTest.models.FileValidationResult;
 import com.example.fmuTest.services.FmuService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -49,7 +50,7 @@ public class SimulationController {
     CsvScenarioService csvScenarioService;
 
     @PostMapping("/withScenario/{id}")
-    public ResponseEntity startSimulationwithScenario(HttpServletRequest request ,  @RequestParam(name = "file", required = false) MultipartFile file, @PathVariable("id") Integer fmuId) throws IOException {
+    public ResponseEntity startSimulationwithScenario(HttpServletRequest request , @RequestParam(name = "file", required = false) MultipartFile file, @PathVariable("id") Integer fmuId) throws IOException {
        // call the getInputVariableList function to extract the input variables of the fmu
         List<String> inputVariableList = csvScenarioService.getInputVariableList(fmuId);
 
@@ -104,7 +105,9 @@ public class SimulationController {
 
 
     @PostMapping("/default/{id}")
-    public ResponseEntity<Boolean> testSimulation(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+    public ResponseEntity<GetFmuSimulationInfoResponse> testSimulation(HttpServletRequest request , @PathVariable("id") Integer fmuId) {
+        ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = null;
+
         try {
             //to call the variableController of the importation microService
             RestTemplate restTemplate = new RestTemplate();
@@ -113,7 +116,7 @@ public class SimulationController {
             header.set(HttpHeaders.AUTHORIZATION, request.getHeader(HttpHeaders.AUTHORIZATION));
             header.setContentType(MediaType.APPLICATION_JSON);
             header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-            header.set("Platform","linux");
+           // header.set("Platform","linux");
 
             HttpEntity requestToSend = new HttpEntity(header);
 
@@ -127,16 +130,16 @@ public class SimulationController {
             // read URI and Add path that returns url
             String url = si.getUri()+"/api/variable/getVariable/" + fmuId;
 
-            ResponseEntity<GetFmuSimulationInfoResponse> responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
+          responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestToSend, GetFmuSimulationInfoResponse.class);
             System.out.println("-----------dataaa ---------------- : "+responseEntity.getBody());
 
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
-            fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList());
+            fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+        return new ResponseEntity<>(responseEntity.getBody(), HttpStatus.OK);
     }
 
     @PostMapping("/changeVariableValue")

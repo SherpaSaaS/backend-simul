@@ -140,6 +140,7 @@ public class FmuService {
         double stopTime = 50000;
         double stepSize = 1;
         int nbSteps = (int) Math.round(stopTime / stepSize);
+        System.out.println("************************************fmu path  *************"+fmuPath);
 
         FmuFile fmuFile=new FmuFile(fmuPath);
         System.out.println("************************************fmu get libreary path *************"+new File(fmuFile.getLibraryPath()));

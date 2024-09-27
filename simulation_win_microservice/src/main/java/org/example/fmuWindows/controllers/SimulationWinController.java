@@ -122,7 +122,7 @@ public class SimulationWinController {
             System.out.println("----------------------request get local name -------------- " + request.getLocalName());
 
             //System.out.println("----------------------request get context  path -------------- "+request.);
-            System.out.println("---------------------- fmu id  -------------- " + fmuId.getClass().getName().toString());
+         //   System.out.println("---------------------- fmu id  -------------- " + fmuId.getClass().getName().toString());
 
 
             // get ServiceInstance list using serviceId
@@ -130,7 +130,7 @@ public class SimulationWinController {
 
             // read manually one instance from index#0
             ServiceInstance si = siList.get(0);
-            System.out.println("---------------------------instance host     --------------------" + si.getHost());
+          //  System.out.println("---------------------------instance host     --------------------" + si.getHost());
 
             // read URI and Add path that returns url
             String url = si.getUri() + "/api/variable/getVariable/" + fmuId;
@@ -140,7 +140,8 @@ public class SimulationWinController {
             System.out.println("------------------befooooooore  --------------------");
             System.setProperty("os.name","win");
             System.out.println("=============os name============="+System.getProperty("os.name"));
-
+            System.out.println("=============env ============="+System.getenv());
+            System.out.println("=============path  ============="+responseEntity.getBody().getFmuPath());
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
             System.out.println("------------------between  --------------------");
 
