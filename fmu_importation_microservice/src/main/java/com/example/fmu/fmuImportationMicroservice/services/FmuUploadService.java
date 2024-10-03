@@ -31,9 +31,9 @@ public class FmuUploadService implements IFmuUploadService {
 
         /********* prepare for saving and unzipping the uploaded file ************/
         String targetFilePath = propertiesAccessor.getFmusFolder() + File.separator +   file.getOriginalFilename();
-        System.out.print("targetFilePath  "+targetFilePath);
+        System.out.println("targetFilePath  "+targetFilePath);
         File targetFile = new File(targetFilePath); // where the uploaded file will be saved
-        System.out.print("targetFile  "+targetFile);
+        System.out.println("targetFile  "+targetFile);
 
         String targetUnzippedDirectory = propertiesAccessor.getExtractedFmusFolder() +
                 Objects.requireNonNull(file.getOriginalFilename()).replace(".fmu" , "");
