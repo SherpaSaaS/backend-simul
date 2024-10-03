@@ -13,7 +13,9 @@ public class PropertiesAccessor {
     @Autowired
     private Environment environment;
 
+
     public static final String FMUS_FOLDER_ENV_VARIABLE = "FMU_UPLOAD_FOLDER";
+
     public static final String FMUS_FOLDER_PROPERTY_VARIABLE = "fmu.upload.folder";
     public static final String FMUS_FOLDER_DEFAULT = System.getProperty("java.io.tmpdir");
 
