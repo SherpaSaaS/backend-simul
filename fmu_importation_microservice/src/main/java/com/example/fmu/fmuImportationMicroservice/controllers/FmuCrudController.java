@@ -158,8 +158,9 @@ public class FmuCrudController {
             String extractedFolder = propertiesAccessor.getExtractedFmusFolder() +
                     Objects.requireNonNull(file.getOriginalFilename()).replace(".fmu", "") +
                     File.separator;
-
+            System.out.println("extractedFolder "+extractedFolder);
             File extractedDir = new File(extractedFolder);
+            System.out.println("extractedDir "+extractedDir);
             AtomicInteger extensionWind = new AtomicInteger();
             AtomicInteger extensionLinux = new AtomicInteger();
             try (Stream<Path> paths = Files.walk(Paths.get(extractedFolder))) {
