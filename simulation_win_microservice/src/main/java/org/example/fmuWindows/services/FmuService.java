@@ -123,7 +123,6 @@ public class FmuService {
                 .filter(var -> var.isTunnable() ||var.isHasConfiguration())
                 .forEach(variable -> variableDataMap.put(variable.getName(), variable));
 
-        System.out.println("-------------- jna devbug load  ------------"+System.setProperty("jna.debug_load", "true"));
        // System.setProperty("jna.library.path", "path/to/your/win64/libs");
         System.out.println("JNA Library Path: " + System.getProperty("jna.library.path"));
         System.setProperty("jna.library.path",System.getProperty("java.io.tmpdir"));

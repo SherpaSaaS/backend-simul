@@ -12,8 +12,10 @@ public class FmuForWinApplication {
 
 	public static void main(String[] args) {
 	//	System.setProperty("os.name", "win");
+		System.out.println("-------------- jna devbug load  ------------"+System.setProperty("jna.debug_load", "true"));
+
 		SpringApplication.run(FmuForWinApplication.class, args);
-			System.out.println("=============os name============="+System.getProperty("os.name"));
+
 		//System.out.println("============env=============="+System.getenv());
 		//System.out.println("============path=============="+System.getProperty("java.library.path"));
 
