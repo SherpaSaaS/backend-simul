@@ -145,6 +145,9 @@ public class FmuService {
         FmuFile fmuFile=new FmuFile(fmuPath);
         System.out.println("************************************fmu get libreary path *************"+new File(fmuFile.getLibraryPath()));
         System.out.println("************************************fmu folder *************"+fmusFolder);
+        System.out.println("************************************simulation fmuPath *************"+fmuPath);
+        System.out.println("************************ fmuFile *************"+fmuFile.getOperatingSystems()+" reesources "+fmuFile.getResourcesDirectoryPath());
+
 
 
         Simulation simulation = new Simulation(fmuPath);
