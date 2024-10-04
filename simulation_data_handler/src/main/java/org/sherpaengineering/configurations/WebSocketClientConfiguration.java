@@ -49,9 +49,9 @@ public class WebSocketClientConfiguration {
 //        stompClient.connect("ws://localhost:8081/websocket", webSocketHandler);
         stompClient.connect(webSocketUrl, webSocketHandler);
     }
-    }
+    
      else
     {
         System.out.println("instance error ");
-    }
+    }}
 }
