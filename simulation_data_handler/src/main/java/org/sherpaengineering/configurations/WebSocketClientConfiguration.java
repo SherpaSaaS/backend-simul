@@ -22,31 +22,35 @@ import java.util.List;
 @Configuration
 public class WebSocketClientConfiguration {
 
-    private final String platform = "windows";
+    private final String platform = "hh";
 
     @Autowired
     public WebSocketClientConfiguration(WebSocketHandler webSocketHandler , DiscoveryClient client) {
         List<ServiceInstance> siList;
-        if (platform=="windows")
-        {
-             siList = client.getInstances("simulation-win-ms");
-        }
-        else{
+        if (platform.equals("windows")) {
+            siList = client.getInstances("simulation-win-ms");
+        } else {
             siList = client.getInstances("simulation-ms");
         }
-       
-        ServiceInstance si = siList.get(0);
+        if (!siList.isEmpty()) {
+            ServiceInstance si = siList.get(0);
 
-        String webSocketUrl = si.getUri().toString().replace("http","ws") + "/simulation/websocket";
-        WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+
+            String webSocketUrl = si.getUri().toString().replace("http", "ws") + "/simulation/websocket";
+            WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 //        container.setDefaultMaxBinaryMessageBufferSize(1024*1024);
 //        container.setDefaultMaxTextMessageBufferSize(1024*1024);
-        WebSocketClient transport = new StandardWebSocketClient(container);
+            WebSocketClient transport = new StandardWebSocketClient(container);
 
 
-        WebSocketStompClient stompClient = new WebSocketStompClient(transport);
-        stompClient.setMessageConverter(new MappingJackson2MessageConverter());
-//        stompClient.connect("ws://localhost:8081/websocket", webSocketHandler);
-        stompClient.connect(webSocketUrl, webSocketHandler);
+            WebSocketStompClient stompClient = new WebSocketStompClient(transport);
+            stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+ //        stompClient.connect("ws://localhost:8081/websocket", webSocketHandler);
+            stompClient.connect(webSocketUrl, webSocketHandler);
+        }
+
+    else
+    {
+        System.out.println("instance error ");
     }
-}
+}}

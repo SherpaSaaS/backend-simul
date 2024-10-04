@@ -157,11 +157,12 @@ public class FmuCrudController {
             String targetFile=fmuUploadService.uploadFmu(file);
             System.out.println("targetFile "+targetFile);
             //TODO make FmuModelDescription returned From the upload Service as FMU object class
-            String extractedFolder = propertiesAccessor.getExtractedFmusFolder() +
+            String extractedFolder = propertiesAccessor.getExtractedFmusFolder() +File.separator+
                     Objects.requireNonNull(file.getOriginalFilename()).replace(".fmu", "") +
                     File.separator;
-
+            System.out.println("extract folder  "+extractedFolder);
             File extractedDir = new File(extractedFolder);
+            System.out.println("extract dir "+extractedDir);
             AtomicInteger extensionWind = new AtomicInteger();
             AtomicInteger extensionLinux = new AtomicInteger();
             try (Stream<Path> paths = Files.walk(Paths.get(extractedFolder))) {

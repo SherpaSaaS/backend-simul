@@ -138,7 +138,7 @@ public class FmuService {
         // initialisation
 
         double startTime = 0;
-        double stopTime = 50000;
+        double stopTime = 500;
         double stepSize = 1;
         int nbSteps = (int) Math.round(stopTime / stepSize);
 
