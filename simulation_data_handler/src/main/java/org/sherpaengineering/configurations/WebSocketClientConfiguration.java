@@ -34,7 +34,7 @@ public class WebSocketClientConfiguration {
         else{
             siList = client.getInstances("simulation-ms");
         }
-       
+        if (!siList.isEmpty()) {
         ServiceInstance si = siList.get(0);
 
         String webSocketUrl = si.getUri().toString().replace("http","ws") + "/simulation/websocket";
@@ -48,5 +48,10 @@ public class WebSocketClientConfiguration {
         stompClient.setMessageConverter(new MappingJackson2MessageConverter());
 //        stompClient.connect("ws://localhost:8081/websocket", webSocketHandler);
         stompClient.connect(webSocketUrl, webSocketHandler);
+    }
+    }
+     else
+    {
+        System.out.println("instance error ");
     }
 }
