@@ -134,7 +134,7 @@ public class SimulationController {
            // System.out.println("-----------dataaa ---------------- : "+responseEntity.getBody());
 
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
-            System.load("/tmp/fmu_39343501_d8c9_4891_b9dc_8892c33fae59PTF_FC_V8p0_R2022b/binaries/linux64/PTF_FC_V8p0_R2022b.so");
+           // System.load("/tmp/fmu_39343501_d8c9_4891_b9dc_8892c33fae59PTF_FC_V8p0_R2022b/binaries/linux64/PTF_FC_V8p0_R2022b.so");
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
         } catch (Exception e) {
