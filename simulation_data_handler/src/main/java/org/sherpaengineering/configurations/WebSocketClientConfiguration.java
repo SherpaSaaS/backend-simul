@@ -22,7 +22,7 @@ import java.util.List;
 @Configuration
 public class WebSocketClientConfiguration {
 
-    private final String platform = "windows";
+    private final String platform = "hh";
 
     @Autowired
     public WebSocketClientConfiguration(WebSocketHandler webSocketHandler , DiscoveryClient client) {
