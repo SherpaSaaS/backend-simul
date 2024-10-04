@@ -36,7 +36,7 @@ public class WebSocketClientConfiguration {
         }
         if (!siList.isEmpty()) {
         ServiceInstance si = siList.get(0);
-
+        System.out.println("=========data handleer ====" +si.getHost()+si);
         String webSocketUrl = si.getUri().toString().replace("http","ws") + "/simulation/websocket";
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 //        container.setDefaultMaxBinaryMessageBufferSize(1024*1024);
