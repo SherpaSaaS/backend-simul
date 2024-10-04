@@ -149,6 +149,7 @@ public class FmuService {
 
         Simulation simulation = new Simulation(fmuPath);
 
+        System.out.println("************************************ after simulation *************");
 
         simulation.init(startTime, stopTime);
         // Convert List<String> to String[]
