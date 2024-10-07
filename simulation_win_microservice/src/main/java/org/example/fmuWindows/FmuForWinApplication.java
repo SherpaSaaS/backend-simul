@@ -20,8 +20,9 @@ public class FmuForWinApplication {
 		//System.out.println("============env=============="+System.getenv());
 		System.out.println("============path systel java lib path =============="+System.getProperty("java.library.path"));
 		System.out.println("============path systel jna lib path =============="+System.getProperty("jna.library.path"));
+		System.load(ClassLoader.getSystemClassLoader().getResource("win32-x86-64/libjnidispatch.so").getPath());
 
-
+		System.out.println("============ class loader  =============="+ClassLoader.getSystemClassLoader().getResource("win32-x86-64/libjnidispatch.so").getPath());
 
 
 
