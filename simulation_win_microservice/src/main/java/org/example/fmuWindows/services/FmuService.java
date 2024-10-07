@@ -148,6 +148,7 @@ public class FmuService {
         System.out.println("************************************fmu get libreary path *************"+fileLibrary);
        System.setProperty("jna.library.path", fileLibrary.toString());
         System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
+        System.out.println("************************ fmuFile *************"+fmuFile.getOperatingSystems()+" resources "+fmuFile.getResourcesDirectoryPath());
 
 
 
