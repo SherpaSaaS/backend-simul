@@ -111,6 +111,14 @@
 
 
     </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/win32-x86-64/</directory>
+                <filtering>true</filtering>
+                <targetPath>META-INF/native/win64/</targetPath> </resource>
+        </resources>
+    </build>
 <!--
     <build>
     <plugins>
