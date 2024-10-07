@@ -16,7 +16,7 @@ public class FmuForWinApplication {
 		SpringApplication.run(FmuForWinApplication.class, args);
 		System.out.println("-------------- jna devbug load  ------------"+System.setProperty("jna.debug_load", "true"));
 		System.setProperty("jna.debug_load.jna", "true");
-		System.setProperty("jna.library.path", "/native/libs/");
+	//	System.setProperty("jna.library.path", "/native/libs/");
 
 		//System.out.println("============env=============="+System.getenv());
 		System.out.println("============path systel java lib path =============="+System.getProperty("java.library.path"));
