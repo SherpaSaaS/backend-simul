@@ -118,15 +118,14 @@ public class FmuService {
     public void runDefaultSimulation(Integer fmuId, List<FmuSimulationVariableDto> fmuVariableList,  String fmuPath) throws IOException {
         //create a hashmap with variablenames and their data to easily access data log(1) complexicity
         HashMap<String, FmuSimulationVariableDto> variableDataMap = new HashMap<>();
-       // System.out.println("--------------map decleration ------------");
         fmuVariableList.stream()
                 .filter(var -> var.isTunnable() ||var.isHasConfiguration())
                 .forEach(variable -> variableDataMap.put(variable.getName(), variable));
 
        // System.setProperty("jna.library.path", "path/to/your/win64/libs");
         System.out.println("JNA Library Path: " + System.getProperty("jna.library.path"));
-        System.setProperty("jna.library.path",System.getProperty("java.io.tmpdir"));
-        System.out.println("JNA Library Path 22222: " + System.getProperty("jna.library.path"));
+     //   System.setProperty("jna.library.path",System.getProperty("java.io.tmpdir"));
+        //System.out.println("JNA Library Path 22222: " + System.getProperty("jna.library.path"));
         List<String> variableNames = fmuVariableList.stream()
                 .map(variable -> variable.getName().toString())
                 .collect(Collectors.toList());
@@ -145,7 +144,12 @@ public class FmuService {
         System.out.println("************************************fmu path  *************"+fmuPath);
 
         FmuFile fmuFile=new FmuFile(fmuPath);
-        System.out.println("************************************fmu get libreary path *************"+new File(fmuFile.getLibraryPath()));
+        File fileLibrary = new File(fmuFile.getLibraryPath());
+        System.out.println("************************************fmu get libreary path *************"+fileLibrary);
+       System.setProperty("jna.library.path", fileLibrary.toString());
+        System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
+
+
 
 
 
