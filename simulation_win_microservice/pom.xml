@@ -108,36 +108,40 @@
         </dependency>
 
 
-
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>4.1.0</version>
+        </dependency>
 
     </dependencies>
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/win32-x86-64/</directory>
-                <filtering>true</filtering>
-                <targetPath>META-INF/native/win64/</targetPath> </resource>
-        </resources>
-    </build>
-<!--
-    <build>
-    <plugins>
-        <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
+    <!--  <build>
+          <resources>
+              <resource>
+                  <directory>src/main/resources/win32-x86-64/</directory>
+                  <filtering>true</filtering>
+                  <targetPath>META-INF/native/win64/</targetPath> </resource>
+          </resources>
+  </build>
 
-        <configuration>
-            <resources>
-                <resource>
-                    <directory>src/main/resources/win-x86-64</directory>
-                    <filtering>true</filtering>
-                </resource>
-            </resources>
+      <build>
+      <plugins>
+          <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.2.0</version>
 
-        </configuration>
-    </plugin>
-    </plugins>
-    </build>!-->
+          <configuration>
+              <resources>
+                  <resource>
+                      <directory>src/main/resources/win-x86-64</directory>
+                      <filtering>true</filtering>
+                  </resource>
+              </resources>
+
+          </configuration>
+      </plugin>
+      </plugins>
+      </build>!-->
 
 </project>
