@@ -139,8 +139,8 @@ public class SimulationWinController {
             VariablePrioritizerMap.addFmuEntryInMap(fmuId);
 
             //System.setProperty("os.name","win");
-            System.out.println("=============os name============="+System.getProperty("os.name"));
-            System.out.println("=============env ============="+System.getenv());
+           // System.out.println("=============os name============="+System.getProperty("os.name"));
+         //   System.out.println("=============env ============="+System.getenv());
 
             System.out.println("=============java tmp dir  ============="+System.getProperty("java.io.tmpdir"));
             System.out.println("============= response entity path  ============="+responseEntity.getBody().getFmuPath());

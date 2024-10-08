@@ -14,12 +14,10 @@ public class FmuForWinApplication {
 		System.setProperty("os.name", "win");
 
 		SpringApplication.run(FmuForWinApplication.class, args);
-		System.out.println("-------------- jna devbug load  ------------"+System.setProperty("jna.debug_load", "true"));
 		System.setProperty("jna.debug_load.jna", "true");
 		System.out.println("-------------- jna devbug load  ------------"+System.getProperty("jna.debug_load.jna"));
-
-		//System.out.println("============env=============="+System.getenv());
 		System.out.println("============path  java lib path =============="+System.getProperty("java.library.path"));
+		System.setProperty("jna.library.path","/tmp/");
 		System.out.println("============path  jna lib path =============="+System.getProperty("jna.library.path"));
 		//System.load(ClassLoader.getSystemClassLoader().getResource("win32-x86-64/libjnidispatch.so").getPath());
 

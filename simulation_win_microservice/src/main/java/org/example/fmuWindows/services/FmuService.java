@@ -148,6 +148,7 @@ public class FmuService {
         File fileLibrary = new File(fmuFile.getLibraryPath());
         System.out.println("************************************fmu get libreary path *************"+fileLibrary);
 
+        System.out.println("************************ fmuFile resource  ************* "+fmuFile.getResourcesDirectoryPath());
 
         String libraryPath = "/tmp/fmu_"+"*"+"/binaries/win64/"+"*"+".dll";
         System.setProperty("jna.library.path", libraryPath);
