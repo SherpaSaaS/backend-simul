@@ -149,13 +149,13 @@ public class FmuService {
         System.out.println("************************************fmu get libreary path *************"+fileLibrary);
 
 
-        String libraryPath = "/tmp/fmu_"+"*"+"/binaries/win64/"+"*"+".dll";
-        System.setProperty("jna.library.path", libraryPath);
+   //     String libraryPath = "/tmp/fmu_"+"*"+"/binaries/win64/"+"*"+".dll";
+     //   System.setProperty("jna.library.path", libraryPath);
 
         System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
 
        // NativeLibrary.addSearchPath("*.dll", libraryPath);
-        System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
+      //  System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
 
 
         System.out.println("--------------------------- class path --------"+System.getProperty("java.class.path"));
