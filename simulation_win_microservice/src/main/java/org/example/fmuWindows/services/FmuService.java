@@ -4,6 +4,7 @@ package org.example.fmuWindows.services;
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
+import com.sun.jna.NativeLibrary;
 import org.example.fmuWindows.dtos.FmuSimulationVariableDto;
 import org.example.fmuWindows.dtos.SimulationValuesDto;
 import org.example.fmuWindows.eventListeners.PrioritizeVariableEventListner;
@@ -146,7 +147,14 @@ public class FmuService {
         FmuFile fmuFile=new FmuFile(fmuPath);
         File fileLibrary = new File(fmuFile.getLibraryPath());
         System.out.println("************************************fmu get libreary path *************"+fileLibrary);
-       System.setProperty("jna.library.path", "/tmp/fmu_*/binaries/win64/test_FMU.dll");
+
+
+        String libraryPath = "/tmp/fmu_"+"*"+"/binaries/win64/"+"*"+".dll";
+        System.setProperty("jna.library.path", libraryPath);
+
+        System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
+
+        NativeLibrary.addSearchPath("*.dll", libraryPath);
         System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
 
 

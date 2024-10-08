@@ -148,6 +148,7 @@ public class FmuService {
         System.out.println("************************************simulation fmuPath *************"+fmuPath);
         System.out.println("************************ fmuFile *************"+fmuFile.getOperatingSystems()+" reesources "+fmuFile.getResourcesDirectoryPath());
 
+        System.out.println("--------------  jna lib path   ------------"+System.getProperty("jna.library.path"));
 
 
         Simulation simulation = new Simulation(fmuPath);
