@@ -123,7 +123,7 @@ public class FmuService {
                 .filter(var -> var.isTunnable() ||var.isHasConfiguration())
                 .forEach(variable -> variableDataMap.put(variable.getName(), variable));
 
-       // System.setProperty("jna.library.path", "path/to/your/win64/libs");
+
         System.out.println("JNA Library Path: " + System.getProperty("jna.library.path"));
      //   System.setProperty("jna.library.path",System.getProperty("java.io.tmpdir"));
         //System.out.println("JNA Library Path 22222: " + System.getProperty("jna.library.path"));
@@ -148,14 +148,13 @@ public class FmuService {
         File fileLibrary = new File(fmuFile.getLibraryPath());
         System.out.println("************************************fmu get libreary path *************"+fileLibrary);
 
-        System.out.println("************************ fmuFile resource  ************* "+fmuFile.getResourcesDirectoryPath());
 
         String libraryPath = "/tmp/fmu_"+"*"+"/binaries/win64/"+"*"+".dll";
         System.setProperty("jna.library.path", libraryPath);
 
         System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
 
-        NativeLibrary.addSearchPath("*.dll", libraryPath);
+       // NativeLibrary.addSearchPath("*.dll", libraryPath);
         System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
 
 
