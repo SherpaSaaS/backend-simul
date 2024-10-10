@@ -164,7 +164,7 @@ public class FmuService {
         NativeLibrary.addSearchPath("*.dll","/tmp/fmu_\"+\"*\"+\"/binaries/win64/\"+\"*\"+\".dll");
         System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
         System.out.println("-------------- user dir   ------------"+System.getProperty("user.dir"));
-        System.out.println("--------------  ressource   ------------"+getClass().getResource("/resources/win32-x86-64").getPath());
+        System.out.println("--------------  ressource   ------------"+getClass().getResource("/resources/win32-x86-64").getPath().toString());
         System.out.println("--------------  jnidispatch    ------------"+System.getProperty("jnidispatch.path"));
 
         Simulation simulation = new Simulation(fmuPath);
