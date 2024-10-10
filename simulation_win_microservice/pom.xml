@@ -112,7 +112,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.5.1</version>
+            <scope>compile</scope>
+        </dependency>
 
 
     </dependencies>

@@ -145,7 +145,6 @@ public class SimulationWinController {
             System.out.println("=============java tmp dir  ============="+System.getProperty("java.io.tmpdir"));
            // System.out.println("============= response entity path  ============="+responseEntity.getBody().getFmuPath());
             fmu.runDefaultSimulation(responseEntity.getBody().getFmuId(), responseEntity.getBody().getVariableDtoList(),responseEntity.getBody().getFmuPath());
-            System.out.println("------------------between  --------------------");
 
             VariablePrioritizerMap.removeFmuEntryFromMap(fmuId);
             System.out.println("-----------dataaa ---------------- : " + responseEntity.getBody());
