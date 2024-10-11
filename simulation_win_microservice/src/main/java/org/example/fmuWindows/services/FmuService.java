@@ -175,6 +175,9 @@ public class FmuService {
         if (files == null || files.length == 0) {
             System.out.println("Aucun fichier trouvé dans le répertoire : " + currentDirectory);
         }
+        else {
+            System.out.println("fileees "+ Arrays.stream(files).toList());
+        }
         System.out.println("--------------  jnidispatch    ------------"+System.getProperty("jnidispatch.path"));
 
         Simulation simulation = new Simulation(fmuPath);
