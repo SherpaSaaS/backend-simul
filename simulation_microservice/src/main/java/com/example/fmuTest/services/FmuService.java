@@ -164,7 +164,7 @@ public class FmuService {
         else {
             System.out.println("fileees "+ Arrays.stream(files).toList());
         }
-        System.out.println(" native lib "+ NativeLibrary.getInstance("ControlledTemperature.so"));
+        //System.out.println(" native lib "+ NativeLibrary.getInstance("ControlledTemperature.so"));
 
         System.out.println("avawebstart. version  "+ System. getProperty("javawebstart. version"));
 
