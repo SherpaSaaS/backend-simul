@@ -149,7 +149,19 @@ public class FmuService {
         System.out.println("************************ fmuFile *************"+fmuFile.getOperatingSystems()+" reesources "+fmuFile.getResourcesDirectoryPath());
 
         System.out.println("--------------  jna lib path   ------------"+System.getProperty("jna.library.path"));
+        String currentDirectory = System.getProperty("user.dir");
+        System.out.println("-------------- user dir   ------------"+currentDirectory);
+        // Créer un objet File pour le répertoire actuel
+        File directory = new File(currentDirectory);
 
+        // Lister les fichiers et dossiers dans le répertoire actuel
+        File[] files = directory.listFiles();
+        if (files == null || files.length == 0) {
+            System.out.println("Aucun fichier trouvé dans le répertoire : " + currentDirectory);
+        }
+        else {
+            System.out.println("fileees "+ Arrays.stream(files).toList());
+        }
 
         Simulation simulation = new Simulation(fmuPath);
 
