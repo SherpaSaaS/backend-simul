@@ -13,6 +13,8 @@ import com.example.fmuTest.utils.VariableAccessor;
 import com.opencsv.CSVWriter;
 import com.opencsv.CSVWriterBuilder;
 import com.opencsv.ICSVWriter;
+import com.sun.jna.Native;
+import com.sun.jna.NativeLibrary;
 import org.javafmi.proxy.FmuFile;
 import org.javafmi.wrapper.Simulation;
 
@@ -162,6 +164,11 @@ public class FmuService {
         else {
             System.out.println("fileees "+ Arrays.stream(files).toList());
         }
+        System.out.println(" native lib "+ NativeLibrary.getInstance("ControlledTemperature.so"));
+
+        System.out.println("avawebstart. version  "+ System. getProperty("javawebstart. version"));
+
+
 
         Simulation simulation = new Simulation(fmuPath);
 
