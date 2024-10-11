@@ -161,10 +161,20 @@ public class FmuService {
 
 
         System.out.println("--------------------------- class path --------"+System.getProperty("java.class.path"));
-        NativeLibrary.addSearchPath("*.dll","/tmp/fmu_\"+\"*\"+\"/binaries/win64/\"+\"*\"+\".dll");
-        System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
+       //NativeLibrary.addSearchPath("*.dll","/tmp/fmu_\"+\"*\"+\"/binaries/win64/\"+\"*\"+\".dll");
+        //System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
         System.out.println("-------------- user dir   ------------"+System.getProperty("user.dir"));
+        // Obtenir le répertoire de travail actuel
+        String currentDirectory = System.getProperty("user.dir");
 
+        // Créer un objet File pour le répertoire actuel
+        File directory = new File(currentDirectory);
+
+        // Lister les fichiers et dossiers dans le répertoire actuel
+        File[] files = directory.listFiles();
+        if (files == null || files.length == 0) {
+            System.out.println("Aucun fichier trouvé dans le répertoire : " + currentDirectory);
+        }
         System.out.println("--------------  jnidispatch    ------------"+System.getProperty("jnidispatch.path"));
 
         Simulation simulation = new Simulation(fmuPath);
