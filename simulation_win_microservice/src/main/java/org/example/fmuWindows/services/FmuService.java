@@ -178,7 +178,6 @@ public class FmuService {
         else {
             System.out.println("fileees "+ Arrays.stream(files).toList());
         }
-        System.out.println("--------------  jnidispatch    ------------"+System.getProperty("jnidispatch.path"));
 
         Simulation simulation = new Simulation(fmuPath);
 

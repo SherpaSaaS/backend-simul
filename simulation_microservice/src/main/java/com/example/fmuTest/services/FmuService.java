@@ -151,9 +151,11 @@ public class FmuService {
         System.out.println("************************ fmuFile *************"+fmuFile.getOperatingSystems()+" reesources "+fmuFile.getResourcesDirectoryPath());
 
         System.out.println("--------------  jna lib path   ------------"+System.getProperty("jna.library.path"));
+        System.setProperty("user.dir","/tmp");
         String currentDirectory = System.getProperty("user.dir");
         System.out.println("-------------- user dir   ------------"+currentDirectory);
         // Créer un objet File pour le répertoire actuel
+
         File directory = new File(currentDirectory);
 
         // Lister les fichiers et dossiers dans le répertoire actuel
@@ -166,7 +168,7 @@ public class FmuService {
         }
         //System.out.println(" native lib "+ NativeLibrary.getInstance("ControlledTemperature.so"));
 
-        System.out.println("avawebstart. version  "+ System. getProperty("javawebstart. version"));
+        System.out.println("javawebstart. version  "+ System. getProperty("javawebstart.version"));
 
 
 
