@@ -10,6 +10,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\simulation_microservice\dataExport_20241017_103149.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\simulation_microservice\dataExport_20241017_112342.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

@@ -178,6 +178,12 @@ public class FmuService {
         else {
             System.out.println("fileees "+ Arrays.stream(files).toList());
         }
+        try {
+            Class.forName("net.java.dev.jna");
+            System.out.println("jna.jar is on the classpath");
+        } catch (ClassNotFoundException e) {
+            System.out.println("jna.jar is not on the classpath");
+        }
 
         Simulation simulation = new Simulation(fmuPath);
 
