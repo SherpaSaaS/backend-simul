@@ -19,10 +19,10 @@ public class FmuForWinApplication {
 		System.out.println("============path  java lib path =============="+System.getProperty("java.library.path"));
 	//	System.setProperty("jna.library.path","/tmp");
 		System.out.println("============path  jna lib path =============="+System.getProperty("jna.library.path"));
-		System.out.println("============path  jna lib path =============="+System.getenv("LD_LIBRARY_PATH"));
+		System.out.println("============ get env path ==============="+System.getenv("LD_LIBRARY_PATH"));
 		//System.load(ClassLoader.getSystemClassLoader().getResource("win32-x86-64/libjnidispatch.so").getPath());
 
-		//System.out.println("============ class loader  =============="+ClassLoader.getSystemClassLoader().getResource("win32-x86-64/libjnidispatch.so").getPath());
+		System.out.println("============ =============="+System.getProperty("jna.platform.loader.library.path"));
 		//System.out.println("============== Classpath: " + System.getProperty("java.class.path"));
 
 

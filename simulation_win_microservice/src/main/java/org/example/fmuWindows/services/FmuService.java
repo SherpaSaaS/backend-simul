@@ -196,6 +196,7 @@ if (libraryFile2.exists() && libraryFile2.isDirectory()) {
     File[] fmus = libraryFile.listFiles();
     if (fmus != null) {
         for (File fmu : fmus) {
+            System.out.println("FMU library file: " + fmu.getAbsolutePath());
             if (fmu.isFile() && fmu.getName().startsWith("fmu_")) {
                 String fmuPath2 = fmu.getAbsolutePath();
                 System.setProperty("jna.library.path", fmuPath2);
@@ -206,6 +207,8 @@ if (libraryFile2.exists() && libraryFile2.isDirectory()) {
 } else {
     System.out.println("FMU library file not found");
 }
+System.out.println("-------------- native extract from resource path   ------------"+Native.extractFromResourcePath("*.dll"));
+
 
 
         Simulation simulation = new Simulation(fmuPath);
