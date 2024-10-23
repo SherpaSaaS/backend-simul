@@ -179,11 +179,34 @@ public class FmuService {
             System.out.println("fileees "+ Arrays.stream(files).toList());
         }
         try {
-            Class.forName("net.java.dev.jna");
+            Class.forName("com.net.java.dev.jna");
             System.out.println("jna.jar is on the classpath");
         } catch (ClassNotFoundException e) {
             System.out.println("jna.jar is not on the classpath");
         }
+        File libraryFile = new File("/tmp/fmu_*/binaries/win64/*.dll");
+        if (libraryFile.exists()) {
+            System.out.println("Library file exists");
+        } else {
+            System.out.println("Library file does not exist");
+        }
+        // Get the absolute path of the FMU library file
+File libraryFile2 = new File("/tmp/fmu_*");
+if (libraryFile2.exists() && libraryFile2.isDirectory()) {
+    File[] fmus = libraryFile.listFiles();
+    if (fmus != null) {
+        for (File fmu : fmus) {
+            if (fmu.isFile() && fmu.getName().startsWith("fmu_")) {
+                String fmuPath2 = fmu.getAbsolutePath();
+                System.setProperty("jna.library.path", fmuPath2);
+                break;
+            }
+        }
+    }
+} else {
+    System.out.println("FMU library file not found");
+}
+
 
         Simulation simulation = new Simulation(fmuPath);
 
