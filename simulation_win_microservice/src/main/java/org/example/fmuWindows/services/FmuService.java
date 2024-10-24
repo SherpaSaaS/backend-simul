@@ -207,7 +207,7 @@ if (libraryFile2.exists() && libraryFile2.isDirectory()) {
 } else {
     System.out.println("FMU library file not found");
 }
-System.out.println("-------------- native extract from resource path   ------------"+Native.extractFromResourcePath("*.dll"));
+//System.out.println("-------------- native extract from resource path   ------------"+Native.extractFromResourcePath("*.dll"));
 
 
 
