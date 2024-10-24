@@ -163,7 +163,7 @@ public class FmuService {
         System.out.println("--------------------------- class path --------"+System.getProperty("java.class.path"));
        //NativeLibrary.addSearchPath("*.dll","/tmp/fmu_\"+\"*\"+\"/binaries/win64/\"+\"*\"+\".dll");
         //System.out.println("-------------- new jna lib path   ------------"+System.getProperty("jna.library.path"));
-        System.setProperty("user.dir","/tmp");
+    //    System.setProperty("user.dir","/tmp");
         // Obtenir le répertoire de travail actuel
         String currentDirectory = System.getProperty("user.dir");
         System.out.println("-------------- user dir   ------------"+currentDirectory);
