@@ -11,7 +11,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 public class FmuForWinApplication {
 
 	public static void main(String[] args) {
-		System.setProperty("os.name", "win");
+	//	System.setProperty("os.name", "win");
+	//	System.setProperty("os.arch", "x86_64");
+
 
 		SpringApplication.run(FmuForWinApplication.class, args);
 		System.setProperty("jna.debug_load.jna", "true");
